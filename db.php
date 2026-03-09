@@ -20,5 +20,5 @@ try {
   $pdo = new PDO($dsn, $DB_USER, $DB_PASS, $options);
 } catch (PDOException $e) {
   // In production: log instead of printing
-  exit("Database connection failed.");
+  exit("Database connection failed: " . $e->getMessage());
 }
