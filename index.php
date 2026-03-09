@@ -31,79 +31,89 @@ $stmt->execute([
 ]);
 
 $flights = $stmt->fetchAll();
-
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Airline Booking System</title>
-<link rel="stylesheet" href="../assets/styles.css">
+  <meta charset="utf-8">
+  <title>Airline Booking System</title>
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 
 <body>
   <div class="container">
-  <div class="header">
-    <div class="brand">
-      <div class="logo"></div>
-      <div>
-        <h1>Airline Booking System</h1>
-        <p>Search flights, book seats, and manage bookings</p>
-         
+    <div class="header">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <h1>Airline Booking System</h1>
+          <p>Search flights, book seats, and manage bookings</p>
+        </div>
+      </div>
+      <a class="btn" href="my_bookings.php" style="text-decoration:none;">View Bookings</a>
+    </div>
+
+    <div class="card">
+      <div class="section">
+        <h2 class="section-title">Search Flights <span class="pill">Available Routes</span></h2>
+
+        <form method="get" class="form">
+          <div class="field">
+            <label>Origin</label>
+            <input type="text" name="origin" placeholder="e.g. New York" value="<?= htmlspecialchars($origin) ?>">
+          </div>
+
+          <div class="field">
+            <label>Destination</label>
+            <input type="text" name="destination" placeholder="e.g. Miami" value="<?= htmlspecialchars($destination) ?>">
+          </div>
+
+          <button class="btn" type="submit">Search Flights</button>
+        </form>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Flights <span class="pill"><?= count($flights) ?> Found</span></h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Flight</th>
+              <th>Route</th>
+              <th>Depart</th>
+              <th>Price</th>
+              <th>Seats</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (count($flights) > 0): ?>
+              <?php foreach ($flights as $f): ?>
+                <tr>
+                  <td><?= htmlspecialchars($f['flight_number']) ?></td>
+                  <td><?= htmlspecialchars($f['origin']) ?> → <?= htmlspecialchars($f['destination']) ?></td>
+                  <td><?= htmlspecialchars($f['depart_time']) ?></td>
+                  <td>$<?= htmlspecialchars($f['base_price']) ?></td>
+                  <td><?= htmlspecialchars($f['seats_available']) ?></td>
+                  <td>
+                    <a class="btn" href="book.php?flight_id=<?= (int)$f['flight_id'] ?>" style="text-decoration:none;">Book</a>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td colspan="6" class="empty-state">No flights found.</td>
+              </tr>
+            <?php endif; ?>
+          </tbody>
+        </table>
       </div>
     </div>
-   
+
+    <div class="footer">Made for CIS project</div>
   </div>
-
-  <div class="card">
-    <div class="section">
-      <form method="get" class="form">
-
-  <div class="field">
-    <label>Origin</label>
-    <input type="text" name="origin" placeholder="e.g. New York">
-  </div>
-
-  <div class="field">
-    <label>Destination</label>
-    <input type="text" name="destination" placeholder="e.g. Miami">
-  </div>
-
-  <button class="btn" type="submit">Search Flights</button>
-
-</form>
-    </div>
-
-<div class="table-wrap">
-  <table>
-   
-    <tr>
-      <th>Flight</th>
-      <th>Route</th>
-      <th>Depart</th>
-      <th>Price</th>
-      <th>Seats</th>
-      <th>Action</th>
-    </tr>
-
-    <?php foreach ($flights as $f): ?>
-    <tr>
-      <td><?= htmlspecialchars($f['flight_number']) ?></td>
-      <td><?= htmlspecialchars($f['origin']) ?> → <?= htmlspecialchars($f['destination']) ?></td>
-      <td><?= htmlspecialchars($f['depart_time']) ?></td>
-      <td>$<?= htmlspecialchars($f['base_price']) ?></td>
-      <td><?= htmlspecialchars($f['seats_available']) ?></td>
-      
-      <td>
-        <a class="btn" href="book.php?flight_id=<?= (int)$f['flight_id'] ?>" style="text-decoration:none;">Book</a>
-      </td>
-    </tr>
-    <?php endforeach; ?>
-
-  </table>
-</div>
-
-</table>
-<td><p><a href="my_bookings.php">View Bookings</a></p></td>
 </body>
 </html>

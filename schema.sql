@@ -7,8 +7,6 @@ DROP DATABASE IF EXISTS airline_booking_portfolio_db;
 CREATE DATABASE airline_booking_portfolio_db;
 USE airline_booking_portfolio_db;
 
-
-
 -- PASSENGERS
 CREATE TABLE passengers (
   passenger_id INT AUTO_INCREMENT PRIMARY KEY,
