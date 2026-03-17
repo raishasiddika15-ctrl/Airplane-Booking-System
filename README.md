@@ -41,6 +41,7 @@ The main goal of the project was to design a relational database and build a wor
   JOIN passengers p ON b.passenger_id = p.passenger_id
   JOIN flights f ON b.flight_id = f.flight_id
   JOIN flight_seats s ON b.seat_id = s.seat_id
+  ```
  
   ## How to Run the Application
   1. Install XAMPP
