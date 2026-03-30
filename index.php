@@ -38,7 +38,7 @@ $flights = $stmt->fetchAll();
 <html>
 <head>
 <title>Airline Booking System</title>
-<link rel="stylesheet" href="../assets/styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -103,7 +103,9 @@ $flights = $stmt->fetchAll();
   </table>
 </div>
 
-</table>
-<td><p><a href="my_bookings.php">View Bookings</a></p></td>
+<p><a href="my_bookings.php">View Bookings</a></p>
+
+</div>
+</div>
 </body>
 </html>
